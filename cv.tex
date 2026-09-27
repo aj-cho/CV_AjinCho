@@ -1,0 +1,227 @@
+% =====================================================================
+%  Curriculum Vitae
+%  Build: pushed to GitHub -> GitHub Actions compiles -> GitHub Pages
+% =====================================================================
+\documentclass[11pt,letterpaper]{article}
+
+% ---------- Packages --------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\IfFileExists{XCharter.sty}{\usepackage{XCharter}}{\usepackage{lmodern}}
+\usepackage[margin=0.9in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{accent}{RGB}{0,60,120}
+\hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
+
+\urlstyle{same}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% ---------- Section style ---------------------------------------------
+\titleformat{\section}
+  {\large\bfseries\scshape\color{accent}}{}{0pt}{}[\vspace{-2pt}\titlerule]
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{6pt}{3pt}
+
+% ---------- Lists ------------------------------------------------------
+\setlist{nosep}
+\setlist[itemize]{leftmargin=1.2em, topsep=2pt, label=\textbullet}
+\newlist{publist}{enumerate}{1}
+\setlist[publist]{label={[\revpubnum]}, leftmargin=2.2em, itemsep=3pt, topsep=2pt}
+% Reverse numbering across all publists (use [resume] on later lists);
+% the total is stored in the .aux file, so it needs two LaTeX runs.
+\providecommand{\totalpubs}{0}
+\makeatletter
+\protected\def\revpubnum{\number\numexpr\totalpubs-\c@publisti+1\relax}
+\AtEndEnvironment{publist}{\xdef\pubcount@sofar{\the\value{publisti}}}
+\AtEndDocument{\@ifundefined{pubcount@sofar}{}{%
+  \immediate\write\@auxout{\gdef\string\totalpubs{\pubcount@sofar}}}}
+\makeatother
+\newenvironment{talklist}{\par\smallskip}{\par}
+
+% ---------- Footer: name, last updated, page ---------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\footnotesize\color{gray} Ajin Cho --- CV}
+\fancyfoot[C]{\footnotesize\color{gray} Last updated: \today}
+\fancyfoot[R]{\footnotesize\color{gray} \thepage\ / \pageref{LastPage}}
+
+% ---------- Custom commands --------------------------------------------
+% Highlight your own name in author lists
+\newcommand{\me}[1]{\textbf{#1}}
+
+% Education / Research Experience
+% \cventry{Institution}{Location}{Title}{Period}
+\newcommand{\cventry}[4]{%
+  \textbf{#1} \hfill #2\\
+  \textit{#3} \hfill #4\par\smallskip}
+
+% Teaching
+% \teachentry{Title}{Venue / Course}{Date (semester)}{Description}
+\newcommand{\teachentry}[4]{%
+  \textbf{#1} \hfill #3\\
+  \textit{#2}\\
+  #4\par\medskip}
+
+% Awards (year + title, wraps cleanly)
+% \award{Year}{Title}
+\newcommand{\award}[2]{%
+  \hangindent=5em\hangafter=1
+  \makebox[5em][l]{#1}#2\par\smallskip}
+
+% Presentations (use inside talklist)
+% \talk{Event}{Venue}{Date}{Presentation title}{Authors}
+\newcommand{\talk}[5]{%
+  \noindent\hangindent=5.5em\hangafter=1
+  \parbox[t]{5.5em}{\raggedright #3}#5. ``#4.'' \textit{#1}, #2\par\medskip}
+
+% Data & software (use inside publist)
+% \software{Paper title}{URL}{Year}
+\newcommand{\software}[3]{%
+  \item Source code for: ``#1.'' \url{#2}, #3.}
+
+% =====================================================================
+\begin{document}
+
+% ---------- Header -----------------------------------------------------
+\begin{center}
+  {\LARGE\bfseries Ajin Cho}\\[6pt]
+  Post-Doctoral Fellow\\
+  School of Earth, Space and Planets, Colorado School of Mines,
+  Golden, CO, USA\\[3pt]
+  \href{mailto:ajin.cho@mines.edu}{ajin.cho@mines.edu}
+  \quad$\cdot$\quad
+  \href{https://sites.google.com/view/ajincho}{sites.google.com/view/ajincho}
+\end{center}
+
+% ---------- Summary ----------------------------------------------------
+\section{Summary}
+My research focuses on the air-sea interaction under extreme conditions 
+(e.g., tropical cyclones, strong surface currents), using a combination of theory, numerical models, and observations.
+
+
+% ---------- Education --------------------------------------------------
+\section{Education}
+\cventry{Yonsei University}{Seoul, Rep. of Korea}{Ph.D. in Atmospheric Sciences}{Sep. 2021 -- Feb. 2026}
+\cventry{Yonsei University}{Seoul, Rep. of Korea}{M.S. in Atmospheric Sciences}{Sep. 2019 -- Aug. 2021}
+\cventry{Yonsei University}{Seoul, Rep. of Korea}{B.S. in Atmospheric Sciences}{Mar. 2014 -- Feb. 2019}
+
+% ---------- Research Experience ----------------------------------------
+\section{Research Experience}
+\cventry{Colorado School of Mines}{Golden, CO, USA}{Postdoctoral Researcher}{Mar. 2026 -- present}
+
+% ---------- Publications -----------------------------------------------
+\section{Publications}
+
+\subsection*{In Preparation}
+\begin{publist}
+  \item \me{Ajin Cho}, Anna Williams, Jacob Davis and Bia Villas Bôas. 
+        ``Relative Roles of Winds and Currents in Surface Wave Variability during Hurricane Erin'', 
+        , in prep.
+\end{publist}
+
+\subsection*{Published}
+\begin{publist}[resume]
+  \item \me{Ajin Cho}, Hajoon Song, Il-Ju Moon, Hyodae Seo, Rui Sun, Matthew R. Mazloff, Aneesh C. Subramanian, Bruce D. Cornuelle and Arthur J. Miller (2026). 
+        ``Modulation of Tropical Cyclone Intensity by Current-Wind Interaction,'' \textit{npj Climate and Atmospheric Science}, 9, 44.
+        \href{https://doi.org/10.1038/s41612-025-01316-1}{doi:10.1038/s41612-025-01316-1}
+  \item \me{Ajin Cho}, Hajoon Song, Hyodae Seo, Rui Sun, Matthew R. Mazloff, Aneesh C. Subramanian, Bruce D. Cornuelle and Arthur J. Miller (2025). 
+        ``Dynamic and Thermodynamic coupling between the Atmosphere and Ocean near the Kuroshio Current and
+Extension System,'' \textit{Ocean Modelling}, 194.
+        \href{https://doi.org/10.1016/j.ocemod.2024.102496}{doi:10.1016/j.ocemod.2024.102496}
+  \item Chaehyeong Lee, Hajoon Song, Yeonju Choi, \me{Ajin Cho} and John Marshall (2025). 
+        ``Observed multi-decadal increase in the surface
+ocean’s thermal inertia,'' \textit{Nature Climate Change}, 15, 308-314.
+        \href{https://doi.org/10.1038/s41558-025-02245-w}{doi:10.1038/s41558-025-02245-w}
+    \item \me{Ajin Cho}, Hajoon Song, Yong-Jin Tak, Sang-Wook Yeh, Soon-Il An, Sang-Min Lee, Hee-Sook Ji and Yu-Kyung Hyun (2022). 
+        ``Atmosphere-driven
+Cold SST Biases over the Western North Pacific in the GloSea5 Seasonal Forecast System,'' \textit{Climate Dynamics}, 59(9), 2571-2584.
+        \href{https://doi.org/10.21203/rs.3.rs-786427/v1}{doi:10.21203/rs.3.rs-786427/v1}
+\end{publist}
+
+% \subsection*{Data and Software}
+% \begin{publist}
+%   \software{Title of the published paper}{https://github.com/yourname/repo}{2025}
+% \end{publist}
+
+% ---------- Teaching Experience ----------------------------------------
+\section{Teaching Experience}
+\teachentry{Teaching Assistant}{ATM 2106: Air-Sea Interaction, Yonsei University}{Spring 2020}
+
+% ---------- Awards & Scholarships --------------------------------------
+\section{Awards \& Scholarships}
+\award{2024}{Best Student Poster Award (Ocean Science Section), 
+              Asia Oceania Geosciences Society (AOGS)}
+\award{2018}{Honors with Excellent Grade (Spring Semester), Yonsei University}
+
+% ---------- Presentations ----------------------------------------------
+\section{Presentations}
+
+\subsection*{Invited Talks}
+\begin{talklist}
+  \talk{Physical Oceanography Dissertation Symposium (PODS)}{Lihue, HI, USA}{Dec 2026 (Scheduled)}
+       {Impact of Sea Surface Currents on Air-Sea Interaction}{\me{Ajin Cho}}
+  \talk{Air-Sea Flux from Space Webinar Series}{Online}{Feb 2025}
+       {Current-Wind Interaction and Tropical Cyclones}{\me{Ajin Cho}}
+\end{talklist}
+
+\subsection*{Conference Presentations}
+\begin{talklist}
+  \talk{Ocean Science Meeting}{Glasgow, Scotland}{Feb 2026}
+       {Modulation of Tropical Cyclone Intensity by Current-Wind Interaction (talk, poster)}
+       {\me{Ajin Cho}, Hajoon Song, Hyodae Seo, Rui Sun, Matthew R. Mazloff, Aneesh C. Subramanian, Bruce D. Cornuelle and Arthur J. Miller}
+  \talk{AOGS Annual Meeting}{Singapore}{Aug 2026}
+       {Modulation of Tropical Cyclone Intensity by Current-Wind Interaction (talk)}
+       {\me{Ajin Cho}, Hajoon Song, Hyodae Seo, Rui Sun, Matthew R. Mazloff, Aneesh C. Subramanian, Bruce D. Cornuelle and Arthur J. Miller}
+  \talk{BACO-25}{Busan, Rep. of Korea}{Jul 2025}
+       {Modulation of Tropical Cyclone Intensity by Current-Wind Interaction (talk, poster)}
+       {\me{Ajin Cho}, Hajoon Song, Hyodae Seo, Rui Sun, Matthew R. Mazloff, Aneesh C. Subramanian, Bruce D. Cornuelle and Arthur J. Miller}
+  \talk{KMS Spring Meeting}{Seoul, Rep. of Korea}{May 2025}
+       {Modulation of Tropical Cyclone Intensity by Current-Wind Interaction (talk, poster)}
+       {\me{Ajin Cho}, Hajoon Song, Hyodae Seo, Rui Sun, Matthew R. Mazloff, Aneesh C. Subramanian, Bruce D. Cornuelle and Arthur J. Miller}
+  \talk{AOGS Annual Meeting}{Pyeongchang, Rep. of Korea}{Jun 2024}
+       {The Changes in the States of Atmosphere and Ocean, and their Exchanges by Surface Current Coupling (poster)}
+       {\me{Ajin Cho}, Hajoon Song, Hyodae Seo, Rui Sun, Aneesh C. Subramanian, Bruce D. Cornuelle and Matthew R. Mazloff}
+  \talk{KSO Spring Meeting}{Seogwipo, Rep. of Korea}{May 2024}
+       {The Changes in the states of Atmosphere and Ocean, and their fluxes by surface current coupling (talk)}
+       {\me{Ajin Cho}, Hajoon Song, Hyodae Seo, Rui Sun, Aneesh C. Subramanian, Bruce D. Cornuelle, Matthew R. Mazloff and Arthur J. Miller}
+  \talk{EGU General Assembly}{Vienna, Austria}{Apr 2023}
+       {Atmospheric and Oceanic Responses to Surface Current Coupling near the Kuroshio Current (talk)}
+       {\me{Ajin Cho}, Hajoon Song and Hyodae Seo}
+  \talk{AGU Fall Meeting}{Chicago, IL, USA}{Dec 2022}
+       {Mesoscale Dynamic and Thermodynamic Coupling between the Atmosphere and the Ocean near the Kuroshio Current (talk)}
+       {\me{Ajin Cho}, Hajoon Song and Hyodae Seo}
+  \talk{KMS Fall Meeting}{Gwangju, Rep. of Korea}{Oct 2022}
+       {Atmosphere-driven cold SST biases over the western North Pacific in the
+        GloSea5 seasonal forecast system (talk)}
+       {\me{Ajin Cho}, Hajoon Song}
+  \talk{KSO Spring Meeting}{Busan, Rep. of Korea}{Jul 2020}
+       {Heat transport by typhoon in WRF-MITgcm coupled model (talk)}
+       {\me{Ajin Cho}, Hajoon Song, Rui Sun, Aneesh C. Subramaian, Bruce D. Cornuelle and Matthew R. Mazloff}
+\end{talklist}
+
+% ---------- Community Activities ---------------------------------------
+\section{Community Activities}
+\textbf{Reviewer:} \textit{Journal of Marine Systems}; \textit{Journal of Geophysical Research: Oceans}
+
+% ---------- Technical Skills -------------------------------------------
+\section{Technical Skills}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}l@{\hspace{1em}}X@{}}
+  Programming     & Python, Fortran, Bash \\
+  Numerical Model & Weather Research Forecasting model (WRF), MIT General Circulation Model (MITgcm),
+WAVEWATCH III \\
+  HPC             & PBS job schedular, parallel computing on HPC clusters \\
+  Tools           & Linux shell scripting, LaTeX, Git \\
+\end{tabularx}
+
+\end{document}
